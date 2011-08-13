@@ -2,7 +2,7 @@ class Account < ActiveRecord::Base
   has_one :pico_money
   has_many :transactions
 
-  after_create :signup_bonus
+#  after_create :signup_bonus
 
   private
 

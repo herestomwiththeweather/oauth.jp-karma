@@ -1,9 +1,9 @@
 development: &defaults
-  site: https://picomoney.com
-  issuer: oauth-dot-jp
-  currency: oauth-dot-jp-karma
-  consumer_key: HKHC9wLfhkBlYrLZcMsvy6IAkyylXhhk4Qo8PRtl
-  consumer_secret: dmfl4genr8p4zuf8UccrdgTGxeLRd9RlouvDPbXc
+  site: http://demo.opensourcecurrency.org
+  issuer: 1-tom-brown-admin
+  currency: hours
+  consumer_key: xBoHeeNNFt3LQ7U1tvAb8BVKr32duE6rdWtpCSFD
+  consumer_secret: HraYcLT5F5nRll5KF5tw8umdER3EOrsFXIEro67T
 
 test:
   <<: *defaults

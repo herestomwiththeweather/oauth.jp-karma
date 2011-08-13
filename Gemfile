@@ -20,6 +20,11 @@ group :production do
   gem 'pg', :require => 'pg'
 end
 
+group :development do
+  gem 'ruby-debug19'
+  gem 'awesome_print'
+end
+
 group :test do
   gem 'turn', :require => false
 end

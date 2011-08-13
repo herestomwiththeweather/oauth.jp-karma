@@ -18,11 +18,11 @@ en:
       transaction_completed: Transaction Completed!
     description:
       welcome: Award friends using OAuth.jp Karma!
-      transaction_completed: Just sent %{amount} Karma to %{to}
+      transaction_completed: Just sent %{amount} to %{to}
   transaction:
     wallet: Your wallet
-    balance: %{balance} Karma
-    create: Send Karma
+    balance: BAL %{balance} 
+    create: Send Credit
     to: To
     amount: AMT
   sessions:

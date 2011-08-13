@@ -74,11 +74,17 @@ class PicoMoney < ActiveRecord::Base
     memoize :issuer
 
     def transaction_url
-      File.join(config[:site], config[:currency])
+      File.join(config[:site], '/transacts', config[:currency])
     end
 
     def request_token!(callback)
-      client.get_request_token({oauth_callback: callback}, {scope: transaction_url})
+      amount = 1000
+      scope1 = config[:site] + '/scopes/wallet.json'
+      scope2 = config[:site] + '/scopes/single_payment.json?asset=' + config[:currency] + '&amount=' + amount.to_s
+      scope3 = config[:site] + '/scopes/list_payments.json'
+      scope = scope1 + ' ' + scope2 + ' ' + scope3
+
+      client.get_request_token({oauth_callback: callback}, {scope: scope})
     end
 
     def access_token!(token, secret, code)
@@ -86,11 +92,17 @@ class PicoMoney < ActiveRecord::Base
     end
 
     def authenticate!(token, secret, code)
+      logger.info "XXX authenticate!"
       access_token = access_token!(token, secret, code)
       identity = new(
         token:  access_token.token,
         secret: access_token.secret
       ).identity
+      logger.info "XXX identity"
+      logger.info "XXX login: #{identity[:login]}"
+      logger.info "XXX email_md5: #{identity[:email_md5]}"
+      logger.info "XXX profile: #{identity[:profile]}"
+      logger.info "XXX thumbnail_url: #{identity[:thumbnail_url]}"
       pico = find_or_initialize_by_identifier(identity[:login])
       pico.update_attributes!(
         token:     access_token.token,
